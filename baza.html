@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Методичка ОРЛС | База сотрудников</title>
+    
+    <link rel="icon" type="image/png" href="https://i.postimg.cc/YCRwXznw/Emblem-of-the-Ministry-of-Internal-Affairs-1.png">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        police: {
+                            blue: '#1e3a8a',
+                            dark: '#0f172a',
+                            light: '#f1f5f9',
+                            accent: '#3b82f6'
+                        }
+                    },
+                    animation: { 'fade-in': 'fadeIn 0.4s ease-out forwards' },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(10px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .bg-pattern {
+            background-color: #f1f5f9;
+            background-image: url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M60 0L120 60L60 120L0 60Z' fill='none' stroke='%23cbd5e1' stroke-width='1' stroke-opacity='0.35'/%3E%3Cpath d='M0 0L120 120M120 0L0 120' stroke='%23cbd5e1' stroke-width='1' stroke-opacity='0.35'/%3E%3Cpath d='M60 0L120 120H0Z' fill='none' stroke='%2394a3b8' stroke-width='1' stroke-opacity='0.15'/%3E%3C/svg%3E");
+            background-size: 200px 200px;
+        }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-pattern text-slate-800 antialiased min-h-screen flex flex-col relative">
+
+    <header class="bg-police-dark text-white shadow-xl sticky top-0 z-40 border-b-2 border-police-blue/30">
+        <div class="max-w-[95rem] mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col xl:flex-row items-center justify-between h-auto xl:h-[72px] py-4 xl:py-0 gap-4">
+                
+                <a href="index.html" class="flex items-center gap-4 cursor-pointer hover:opacity-80 transition-opacity shrink-0">
+                    <img src="https://i.postimg.cc/NjS8Pk0R/Patch-of-the-Police-of-Russia.png" alt="Герб ППС" class="h-11 w-11 object-contain drop-shadow-md">
+                    <div>
+                        <h1 class="text-xl md:text-2xl font-bold uppercase tracking-wider flex items-center gap-2">
+                            ОРЛС МВД <span class="hidden md:inline text-police-accent text-sm">|</span>
+                        </h1>
+                        <p class="text-xs text-slate-300 font-medium tracking-wide">Методический портал</p>
+                    </div>
+                </a>
+
+                <nav class="w-full xl:w-auto overflow-x-auto scrollbar-hide pb-1 xl:pb-0">
+                    <div class="flex items-center justify-start xl:justify-end space-x-1 min-w-max px-1">
+                        <a href="index.html" class="text-slate-300 hover:text-white hover:bg-slate-800 px-3.5 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2">
+                            <i class="fa-solid fa-house"></i> Главная
+                        </a>
+                        <a href="baza.html" class="bg-police-blue text-white px-3.5 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2 shadow-inner">
+                            <i class="fa-solid fa-users-viewfinder"></i> База сотрудников
+                        </a>
+                        <a href="ryadovie.html" class="text-slate-300 hover:text-white hover:bg-slate-800 px-3.5 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2">
+                            <i class="fa-solid fa-user-graduate"></i> Рядовые
+                        </a>
+                        <a href="obppsp.html" class="text-slate-300 hover:text-white hover:bg-slate-800 px-3.5 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2">
+                            <i class="fa-solid fa-shield-halved"></i> ОБ ППСП
+                        </a>
+                        <a href="upz.html" class="text-slate-300 hover:text-white hover:bg-slate-800 px-3.5 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2">
+                            <i class="fa-solid fa-truck-fast"></i> УПЗ
+                        </a>
+                        <a href="zakon.html" class="text-slate-300 hover:text-white hover:bg-slate-800 px-3.5 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2">
+                            <i class="fa-solid fa-scale-balanced"></i> Законодательство
+                        </a>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full relative z-10">
+        <div class="animate-fade-in max-w-4xl mx-auto mt-8">
+            <div class="bg-white/95 backdrop-blur p-12 rounded-2xl shadow-sm border border-slate-200 text-center">
+                <i class="fa-solid fa-users-viewfinder text-6xl text-slate-200 mb-6 block"></i>
+                <h3 class="text-3xl font-bold text-slate-800 mb-3">База сотрудников</h3>
+                <p class="text-slate-500 text-lg">Раздел находится в стадии наполнения.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-police-dark text-slate-400 py-8 border-t-2 border-police-blue/30 mt-auto relative z-10">
+        <div class="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-4">
+                <img src="https://i.postimg.cc/YCRwXznw/Emblem-of-the-Ministry-of-Internal-Affairs-1.png" class="h-12 w-12 object-contain opacity-60 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300 drop-shadow-md">
+                <div>
+                    <p class="text-sm text-slate-300 font-medium">© 2026 ОРЛС МВД.</p>
+                    <p class="text-xs mt-1 opacity-50">Методический портал отдела по работе с личным составом.</p>
+                </div>
+            </div>
+            <div class="flex flex-col items-center md:items-end text-sm text-slate-400 text-center md:text-right">
+                <p class="mb-1">
+                    By <span class="text-white font-semibold tracking-wide">Dionis_Gruntov</span> 
+                    <i class="fa-solid fa-heart text-red-500 mx-1.5 animate-pulse drop-shadow-md"></i> 
+                    by <span class="text-white font-semibold tracking-wide">Anastasiya_Gradowa</span>
+                </p>
+                <p class="opacity-70 hover:opacity-100 transition-opacity">by <span class="text-white font-bold tracking-widest uppercase">"ГАИ"</span></p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

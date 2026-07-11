@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Методичка ОРЛС | УПЗ</title>
+    
+    <link rel="icon" type="image/png" href="https://i.postimg.cc/YCRwXznw/Emblem-of-the-Ministry-of-Internal-Affairs-1.png">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        police: {
+                            blue: '#1e3a8a',
+                            dark: '#0f172a',
+                            light: '#f1f5f9',
+                            accent: '#3b82f6'
+                        }
+                    },
+                    animation: { 'fade-in': 'fadeIn 0.4s ease-out forwards' },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(10px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .bg-pattern {
+            background-color: #f1f5f9;
+            background-image: url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M60 0L120 60L60 120L0 60Z' fill='none' stroke='%23cbd5e1' stroke-width='1' stroke-opacity='0.35'/%3E%3Cpath d='M0 0L120 120M120 0L0 120' stroke='%23cbd5e1' stroke-width='1' stroke-opacity='0.35'/%3E%3Cpath d='M60 0L120 120H0Z' fill='none' stroke='%2394a3b8' stroke-width='1' stroke-opacity='0.15'/%3E%3C/svg%3E");
+            background-size: 200px 200px;
+        }
+        
+        .accordion-wrapper {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.4s ease-in-out, opacity 0.4s ease-in-out;
+            opacity: 0;
+        }
+        
+        .accordion-wrapper.open {
+            grid-template-rows: 1fr;
+            opacity: 1;
+        }
+        
+        .accordion-inner { overflow: hidden; }
+        .chevron { transition: transform 0.3s ease; }
+        .chevron.rotated { transform: rotate(180deg); }
+
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-pattern text-slate-800 antialiased min-h-screen flex flex-col relative">
+
+    <header class="bg-police-dark text-white shadow-xl sticky top-0 z-40 border-b-2 border-police-blue/30">
+        <div class="max-w-[95rem] mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col xl:flex-row items-center justify-between h-auto xl:h-[72px] py-4 xl:py-0 gap-4">
+                
+                <a href="index.html" class="flex items-center gap-4 cursor-pointer hover:opacity-80 transition-opacity shrink-0">
+                    <img src="https://i.postimg.cc/NjS8Pk0R/Patch-of-the-Police-of-Russia.png" alt="Герб ППС" class="h-11 w-11 object-contain drop-shadow-md">
+                    <div>
+                        <h1 class="text-xl md:text-2xl font-bold uppercase tracking-wider flex items-center gap-2">
+                            ОРЛС МВД <span class="hidden md:inline text-police-accent text-sm">|</span>
+                        </h1>
+                        <p class="text-xs text-slate-300 font-medium tracking-wide">Методический портал</p>
+                    </div>
+                </a>
+
+                <nav class="w-full xl:w-auto overflow-x-auto scrollbar-hide pb-1 xl:pb-0">
+                    <div class="flex items-center justify-start xl:justify-end space-x-1 min-w-max px-1">
+                        <a href="index.html" class="text-slate-300 hover:text-white hover:bg-slate-800 px-3.5 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2">
+                            <i class="fa-solid fa-house"></i> Главная
+                        </a>
+                        <a href="baza.html" class="text-slate-300 hover:text-white hover:bg-slate-800 px-3.5 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2">
+                            <i class="fa-solid fa-users-viewfinder"></i> База сотрудников
+                        </a>
+                        <a href="ryadovie.html" class="text-slate-300 hover:text-white hover:bg-slate-800 px-3.5 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2">
+                            <i class="fa-solid fa-user-graduate"></i> Рядовые
+                        </a>
+                        <a href="obppsp.html" class="text-slate-300 hover:text-white hover:bg-slate-800 px-3.5 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2">
+                            <i class="fa-solid fa-shield-halved"></i> ОБ ППСП
+                        </a>
+                        <a href="upz.html" class="bg-police-blue text-white px-3.5 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2 shadow-inner">
+                            <i class="fa-solid fa-truck-fast"></i> УПЗ
+                        </a>
+                        <a href="zakon.html" class="text-slate-300 hover:text-white hover:bg-slate-800 px-3.5 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2">
+                            <i class="fa-solid fa-scale-balanced"></i> Законодательство
+                        </a>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full relative z-10">
+        <div class="animate-fade-in">
+            <!-- Шапка раздела -->
+            <div class="bg-gradient-to-r from-white to-slate-50 rounded-2xl shadow-sm border border-slate-200 p-8 flex flex-col md:flex-row items-center gap-8 mb-8 overflow-hidden relative">
+                <img src="https://i.postimg.cc/k4cXtPXC/Generated-Image-July-10-2026-10-51PM-Photoroom.png" class="h-48 md:h-56 object-contain drop-shadow-[0_10px_15px_rgba(0,0,0,0.3)] hover:scale-105 transition-transform duration-500 z-10" alt="Практическое занятие">
+                <div class="text-center md:text-left z-10">
+                    <h3 class="text-3xl font-extrabold text-police-dark mb-3">Учебно-практические занятия (УПЗ)</h3>
+                    <p class="text-slate-600 text-lg max-w-2xl">Методические материалы для проведения тренировок, отработки практических навыков и алгоритмов действий.</p>
+                </div>
+                <i class="fa-solid fa-truck-fast absolute -right-10 -bottom-10 text-9xl text-slate-100 z-0 opacity-50"></i>
+            </div>
+            
+            <div class="space-y-4">
+                
+                <!-- УПЗ: Оцепление -->
+                <div class="bg-white/95 backdrop-blur rounded-xl shadow-sm border border-slate-200 overflow-hidden transition-shadow hover:shadow-md">
+                    <button onclick="toggleAccordion('upz-oceplenie', 'chev-oceplenie')" class="w-full px-6 py-5 flex items-center justify-between hover:bg-slate-50 transition-colors focus:outline-none group">
+                        <div class="flex items-center gap-4">
+                            <div class="bg-police-light p-3 rounded-full group-hover:bg-police-blue group-hover:text-white transition-colors text-police-accent shadow-sm">
+                                <i class="fa-solid fa-ban text-xl"></i>
+                            </div>
+                            <h4 class="text-lg md:text-xl font-bold text-police-dark text-left">УПЗ: Оцепление</h4>
+                        </div>
+                        <i id="chev-oceplenie" class="fa-solid fa-chevron-down text-slate-400 chevron text-lg bg-slate-100 p-2 rounded-full"></i>
+                    </button>
+                    <div id="upz-oceplenie" class="accordion-wrapper bg-slate-50 border-t border-slate-200">
+                        <div class="accordion-inner">
+                            <div class="p-6 md:p-8 text-slate-800 space-y-4 text-sm">
+                                <h5 class="font-bold text-police-dark text-lg mb-2">Учебно-практическое задание (УПЗ)<br>Тема: «Оцепление»</h5>
+                                <p><strong>Цель:</strong> изучить порядок организации оцепления, обязанности сотрудников, требования безопасности и алгоритм действий при различных ситуациях.</p>
+                                
+                                <div class="bg-slate-100 p-4 border-l-4 border-police-blue rounded-r my-4 shadow-sm">
+                                    <p><strong>Оцепление</strong> — это комплекс мероприятий по ограничению доступа людей и транспорта на определённую территорию с целью обеспечения общественной безопасности, сохранности места происшествия, проведения специальных мероприятий или ликвидации последствий чрезвычайных ситуаций.</p>
+                                </div>
+
+                                <p><strong>Основные задачи оцепления:</strong></p>
+                                <ul class="list-disc pl-6 space-y-1 mb-4">
+                                    <li>предотвращение проникновения посторонних лиц;</li>
+                                    <li>обеспечение безопасности граждан;</li>
+                                    <li>сохранение следов происшествия;</li>
+                                    <li>создание условий для работы оперативных служб;</li>
+                                    <li>регулирование движения пешеходов и транспорта.</li>
+                                </ul>
+
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="bg-white p-4 border border-slate-200 rounded shadow-sm">
+                                        <h6 class="font-bold text-police-blue mb-1">Пример 1: Дорожно-транспортное происшествие</h6>
+                                        <p class="text-xs text-slate-500 mb-2">Ситуация: На оживлённом перекрёстке произошло ДТП с пострадавшими.</p>
+                                        <ul class="list-disc pl-5 space-y-1">
+                                            <li>Определить границы оцепления.</li>
+                                            <li>Ограничить движение транспорта и пешеходов.</li>
+                                            <li>Не допускать посторонних на место происшествия.</li>
+                                            <li>Обеспечить беспрепятственный проезд экстренных служб.</li>
+                                            <li>Доложить руководителю о выполнении задачи.</li>
+                                        </ul>
+                                    </div>
+                                    <div class="bg-white p-4 border border-slate-200 rounded shadow-sm">
+                                        <h6 class="font-bold text-police-blue mb-1">Пример 2: Обнаружение подозрительного предмета</h6>
+                                        <p class="text-xs text-slate-500 mb-2">Ситуация: В торговом центре обнаружен бесхозный рюкзак.</p>
+                                        <ul class="list-disc pl-5 space-y-1">
+                                            <li>Немедленно организовать оцепление опасной зоны.</li>
+                                            <li>Не прикасаться к предмету.</li>
+                                            <li>Организовать безопасный вывод людей.</li>
+                                            <li>Исключить доступ граждан.</li>
+                                            <li>Дождаться прибытия профильных служб и выполнять их указания.</li>
+                                        </ul>
+                                    </div>
+                                    <div class="bg-white p-4 border border-slate-200 rounded shadow-sm">
+                                        <h6 class="font-bold text-police-blue mb-1">Пример 3: Массовое мероприятие</h6>
+                                        <p class="text-xs text-slate-500 mb-2">Ситуация: Во время городского праздника необходимо обеспечить безопасность.</p>
+                                        <ul class="list-disc pl-5 space-y-1">
+                                            <li>Организовать оцепление по периметру площадки.</li>
+                                            <li>Контролировать входы и выходы.</li>
+                                            <li>Следить за соблюдением общественного порядка.</li>
+                                            <li>Не допускать проезда транспорта в закрытую зону.</li>
+                                            <li>При возникновении чрезвычайной ситуации действовать согласно установленному.</li>
+                                        </ul>
+                                    </div>
+                                    <div class="bg-white p-4 border border-slate-200 rounded shadow-sm">
+                                        <h6 class="font-bold text-police-blue mb-1">Пример 4: Пожар в жилом доме</h6>
+                                        <p class="text-xs text-slate-500 mb-2">Ситуация: Произошёл пожар в многоквартирном доме.</p>
+                                        <ul class="list-disc pl-5 space-y-1">
+                                            <li>Ограничить доступ граждан к месту пожара.</li>
+                                            <li>Создать безопасную зону вокруг здания.</li>
+                                            <li>Не допускать препятствий работе пожарных подразделений.</li>
+                                            <li>Организовать безопасное движение людей.</li>
+                                            <li>Информировать граждан о необходимости соблюдать безопасную дистанцию.</li>
+                                        </ul>
+                                    </div>
+                                    <div class="bg-white p-4 border border-slate-200 rounded shadow-sm md:col-span-2">
+                                        <h6 class="font-bold text-police-blue mb-1">Пример 5: Место совершения преступления</h6>
+                                        <p class="text-xs text-slate-500 mb-2">Ситуация: После сообщения о преступлении необходимо сохранить обстановку до прибытия следственно-оперативной группы.</p>
+                                        <ul class="list-decimal pl-5 space-y-1">
+                                            <li>Определить границы оцепления.</li>
+                                            <li>Не допускать посторонних лиц.</li>
+                                            <li>Исключить уничтожение или повреждение следов.</li>
+                                            <li>Фиксировать лиц, входящих и выходящих из зоны оцепления, если это предусмотрено организацией работы.</li>
+                                            <li>Поддерживать связь с руководителем и выполнять поступающие распоряжения.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <h6 class="font-bold text-police-dark mt-6 mb-2">Контрольные вопросы</h6>
+                                <ol class="list-decimal pl-6 space-y-1 mb-4">
+                                    <li>Что такое оцепление?</li>
+                                    <li>Для каких целей организуется оцепление?</li>
+                                    <li>Какие обязанности несут сотрудники, находящиеся в оцеплении?</li>
+                                    <li>Какие действия запрещается выполнять во время несения службы?</li>
+                                    <li>Каковы особенности оцепления при ДТП, пожаре и обнаружении подозрительного предмета?</li>
+                                </ol>
+
+                                <div class="bg-green-50 p-4 border-l-4 border-green-500 rounded-r shadow-sm">
+                                    <p><strong>Вывод:</strong> Правильно организованное оцепление обеспечивает безопасность граждан, способствует эффективной работе экстренных и оперативных служб, а также помогает сохранить место происшествия в неизменном виде до завершения необходимых мероприятий.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- УПЗ: Опрос -->
+                <div class="bg-white/95 backdrop-blur rounded-xl shadow-sm border border-slate-200 overflow-hidden transition-shadow hover:shadow-md">
+                    <button onclick="toggleAccordion('upz-opros', 'chev-opros')" class="w-full px-6 py-5 flex items-center justify-between hover:bg-slate-50 transition-colors focus:outline-none group">
+                        <div class="flex items-center gap-4">
+                            <div class="bg-police-light p-3 rounded-full group-hover:bg-police-blue group-hover:text-white transition-colors text-police-accent shadow-sm">
+                                <i class="fa-solid fa-clipboard-question text-xl"></i>
+                            </div>
+                            <h4 class="text-lg md:text-xl font-bold text-police-dark text-left">УПЗ: Опрос</h4>
+                        </div>
+                        <i id="chev-opros" class="fa-solid fa-chevron-down text-slate-400 chevron text-lg bg-slate-100 p-2 rounded-full"></i>
+                    </button>
+                    <div id="upz-opros" class="accordion-wrapper bg-slate-50 border-t border-slate-200">
+                        <div class="accordion-inner">
+                            <div class="p-6 md:p-8 text-slate-800 space-y-4 text-sm">
+                                <h5 class="font-bold text-police-dark text-lg mb-2">Учебно-практическое задание (УПЗ)</h5>
+                                <p><strong>Цель:</strong> Изучить порядок проведения опроса, права опрашиваемого лица, обязанности сотрудника, а также научиться применять нормы УПК при проведении опроса.</p>
+                                
+                                <h6 class="font-bold text-police-blue mt-4">Теоретическая часть</h6>
+                                <p><strong>Опрос</strong> — это процессуальное действие, направленное на получение сведений, имеющих значение для проверки сообщения о преступлении или расследования уголовного дела.</p>
+                                <p>Согласно статье 49 УПК:</p>
+                                <ul class="list-disc pl-6 space-y-1 mb-2">
+                                    <li>опрос проводится уполномоченным лицом по месту нахождения опрашиваемого либо в помещении с обязательной аудио- или видеофиксацией и составлением протокола;</li>
+                                    <li>участие в опросе является добровольным;</li>
+                                    <li>опрашиваемый вправе отказаться от прохождения данной процедуры;</li>
+                                    <li>продолжительность опроса законом не ограничивается.</li>
+                                </ul>
+                                <p>Во время проведения опроса сотрудник обязан соблюдать законность, уважать честь и достоинство гражданина, не применять угрозы, насилие или психологическое давление, а также объективно фиксировать полученную информацию.</p>
+
+                                <h6 class="font-bold text-police-blue mt-6">Практическая часть</h6>
+                                <div class="space-y-4 mt-2">
+                                    <div class="bg-white p-4 border border-slate-200 rounded shadow-sm">
+                                        <p class="font-bold text-slate-700">Ситуация №1. Очевидец дорожно-транспортного происшествия</p>
+                                        <p class="text-xs text-slate-500 mb-2">Следователь прибыл на место ДТП и установил очевидца происшествия.</p>
+                                        <p>Порядок действий:</p>
+                                        <ul class="list-decimal pl-5 space-y-1 text-slate-600">
+                                            <li>Представиться и сообщить цель обращения.</li>
+                                            <li>Разъяснить, что участие в опросе является добровольным.</li>
+                                            <li>Получить согласие гражданина.</li>
+                                            <li>Провести опрос и выяснить обстоятельства происшествия.</li>
+                                            <li>Зафиксировать ответы в протоколе с применением аудио- или видеозаписи.</li>
+                                            <li>После окончания ознакомить гражданина с протоколом и получить подпись.</li>
+                                        </ul>
+                                    </div>
+                                    <div class="bg-white p-4 border border-slate-200 rounded shadow-sm">
+                                        <p class="font-bold text-slate-700">Ситуация №2. Опрос потерпевшего</p>
+                                        <p class="text-xs text-slate-500 mb-2">После совершения кражи потерпевший обратился в правоохранительные органы.</p>
+                                        <p>Порядок действий:</p>
+                                        <ul class="list-decimal pl-5 space-y-1 text-slate-600">
+                                            <li>установить личность потерпевшего;</li>
+                                            <li>провести добровольный опрос;</li>
+                                            <li>уточнить время, место и обстоятельства совершения преступления;</li>
+                                            <li>выяснить перечень похищенного имущества;</li>
+                                            <li>оформить результаты опроса в протоколе.</li>
+                                        </ul>
+                                    </div>
+                                    <div class="bg-white p-4 border border-slate-200 rounded shadow-sm">
+                                        <p class="font-bold text-slate-700">Ситуация №3. Опрос свидетеля</p>
+                                        <p class="text-xs text-slate-500 mb-2">Во время расследования уголовного дела установлен свидетель преступления.</p>
+                                        <p>Порядок действий:</p>
+                                        <ul class="list-decimal pl-5 space-y-1 text-slate-600">
+                                            <li>разъяснить цель проведения опроса;</li>
+                                            <li>сообщить о добровольном характере процедуры;</li>
+                                            <li>выяснить известные свидетелю обстоятельства;</li>
+                                            <li>не оказывать давления и не склонять к определённым ответам;</li>
+                                            <li>оформить протокол опроса.</li>
+                                        </ul>
+                                    </div>
+                                    <div class="bg-white p-4 border border-slate-200 rounded shadow-sm">
+                                        <p class="font-bold text-slate-700">Ситуация №4. Отказ от опроса</p>
+                                        <p class="text-xs text-slate-500 mb-2">Гражданин отказался отвечать на вопросы следователя.</p>
+                                        <p>Действия сотрудника:</p>
+                                        <ul class="list-decimal pl-5 space-y-1 text-slate-600">
+                                            <li>разъяснить добровольный характер процедуры;</li>
+                                            <li>не принуждать гражданина к участию;</li>
+                                            <li>зафиксировать отказ в установленном порядке;</li>
+                                            <li>продолжить проверку другими законными способами получения информации.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="bg-blue-50 p-4 border-l-4 border-police-blue rounded-r shadow-sm mt-4">
+                                    <p><strong>Вывод:</strong> Опрос является добровольным процессуальным действием, позволяющим получить сведения, необходимые для проверки обстоятельств уголовного дела. Следователь обязан соблюдать требования УПК, обеспечивать законность проведения процедуры, уважать права граждан и надлежащим образом оформлять результаты опроса.</p>
+                                </div>
+                                
+                                <h6 class="font-bold text-police-dark mt-6 mb-2">Контрольные вопросы</h6>
+                                <ol class="list-decimal pl-6 space-y-1 mb-4">
+                                    <li>Что такое опрос?</li>
+                                    <li>Где может проводиться опрос?</li>
+                                    <li>Является ли участие гражданина в опросе обязательным?</li>
+                                    <li>Каким документом оформляются результаты опроса?</li>
+                                    <li>Обязательно ли применение аудио- или видеофиксации при проведении опроса?</li>
+                                    <li>Какие действия запрещено совершать сотруднику во время проведения опроса?</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- УПЗ: Приём заявления -->
+                <div class="bg-white/95 backdrop-blur rounded-xl shadow-sm border border-slate-200 overflow-hidden transition-shadow hover:shadow-md">
+                    <button onclick="toggleAccordion('upz-zayavlenie', 'chev-zayavlenie')" class="w-full px-6 py-5 flex items-center justify-between hover:bg-slate-50 transition-colors focus:outline-none group">
+                        <div class="flex items-center gap-4">
+                            <div class="bg-police-light p-3 rounded-full group-hover:bg-police-blue group-hover:text-white transition-colors text-police-accent shadow-sm">
+                                <i class="fa-solid fa-file-signature text-xl"></i>
+                            </div>
+                            <h4 class="text-lg md:text-xl font-bold text-police-dark text-left">УПЗ: Приём заявления о преступлении</h4>
+                        </div>
+                        <i id="chev-zayavlenie" class="fa-solid fa-chevron-down text-slate-400 chevron text-lg bg-slate-100 p-2 rounded-full"></i>
+                    </button>
+                    <div id="upz-zayavlenie" class="accordion-wrapper bg-slate-50 border-t border-slate-200">
+                        <div class="accordion-inner">
+                            <div class="p-6 md:p-8 text-slate-800 space-y-4 text-sm">
+                                <h5 class="font-bold text-police-dark text-lg mb-2">Учебно-практическое задание (УПЗ)<br>Тема: «Приём заявления о преступлении»</h5>
+                                <p><strong>Цель:</strong> Изучить порядок приёма заявления о преступлении, основания для возбуждения уголовного дела, а также алгоритм действий следователя при регистрации сообщения о преступлении.</p>
+                                
+                                <h6 class="font-bold text-police-blue mt-4">Нормативная база</h6>
+                                <ul class="list-disc pl-6 space-y-1 mb-2">
+                                    <li>Глава 11 УПК «Поводы и основания для возбуждения уголовного дела».</li>
+                                    <li>Статья 36 УПК «Поводы и основания для возбуждения уголовного дела».</li>
+                                    <li>Статья 37 УПК «Заявление о преступлении».</li>
+                                    <li>Статья 40 УПК «Порядок рассмотрения сообщения о преступлении».</li>
+                                    <li>Статья 41 УПК «Решения, принимаемые по результатам рассмотрения сообщения о преступлении».</li>
+                                </ul>
+
+                                <h6 class="font-bold text-police-blue mt-4">Теоретическая часть</h6>
+                                <p>Согласно статье 36 УПК, поводами для возбуждения уголовного дела являются: заявление о преступлении; явка с повинной; сообщение о совершённом или готовящемся преступлении, полученное из иных источников.</p>
+                                <p>В соответствии со статьёй 37 УПК заявление о преступлении может быть подано в устной или письменной форме. Письменное заявление должно быть подписано заявителем. <strong>Анонимное заявление не является поводом для возбуждения уголовного дела.</strong></p>
+                                <p>После поступления сообщения следователь обязан принять его, проверить и принять процессуальное решение в срок не позднее трёх суток.</p>
+
+                                <div class="bg-white p-4 border border-slate-200 rounded mt-4 shadow-sm">
+                                    <h6 class="font-bold text-police-dark mb-2">Практическая ситуация</h6>
+                                    <p class="mb-2">В дежурную часть обратился гражданин Иванов И.И. с письменным заявлением о том, что неизвестное лицо похитило принадлежащий ему мобильный телефон возле торгового центра. В заявлении указаны дата, время, место происшествия и приметы предполагаемого преступника.<br>Следователь обязан принять заявление и организовать его проверку.</p>
+                                    
+                                    <h6 class="font-bold text-police-dark mt-4 mb-2">Алгоритм действий следователя:</h6>
+                                    <ol class="list-decimal pl-6 space-y-1 text-slate-700">
+                                        <li>Представиться заявителю и установить его личность.</li>
+                                        <li>Принять письменное заявление и убедиться в наличии подписи заявителя.</li>
+                                        <li>Зарегистрировать сообщение о преступлении в установленном порядке.</li>
+                                        <li>Разъяснить заявителю его права и порядок рассмотрения сообщения.</li>
+                                        <li>Проверить изложенные в заявлении обстоятельства.</li>
+                                        <li>При необходимости провести опрос заявителя и очевидцев, осмотреть место происшествия, запросить записи камер видеонаблюдения.</li>
+                                        <li>В течение срока, установленного УПК, принять одно из процессуальных решений:
+                                            <ul class="list-disc pl-5 mt-1 text-slate-600">
+                                                <li>возбудить уголовное дело;</li>
+                                                <li>отказать в возбуждении уголовного дела;</li>
+                                                <li>назначить доследственную проверку;</li>
+                                                <li>передать материалы по компетенции.</li>
+                                            </ul>
+                                        </li>
+                                    </ol>
+                                </div>
+                                
+                                <h6 class="font-bold text-police-blue mt-4">Практическое задание</h6>
+                                <p>Необходимо определить:</p>
+                                <ul class="list-disc pl-6 space-y-1 mb-2 text-slate-700">
+                                    <li>имеются ли поводы и основания для возбуждения уголовного дела;</li>
+                                    <li>какие первоначальные проверочные мероприятия необходимо провести;</li>
+                                    <li>какое решение должен принять следователь по результатам проверки.</li>
+                                </ul>
+
+                                <div class="bg-indigo-50 p-4 border-l-4 border-indigo-500 rounded-r shadow-sm mt-4">
+                                    <p><strong>Вывод:</strong> Правильный приём заявления о преступлении является первым этапом уголовного судопроизводства. От полноты регистрации сообщения и своевременности проверки зависит законность принятого процессуального решения и эффективность дальнейшего расследования.</p>
+                                </div>
+
+                                <h6 class="font-bold text-police-dark mt-6 mb-2">Контрольные вопросы</h6>
+                                <ol class="list-decimal pl-6 space-y-1 mb-4">
+                                    <li>Какие поводы для возбуждения уголовного дела предусмотрены УПК?</li>
+                                    <li>В какой форме может быть подано заявление о преступлении?</li>
+                                    <li>Является ли анонимное заявление поводом для возбуждения уголовного дела?</li>
+                                    <li>В какой срок следователь обязан рассмотреть сообщение о преступлении?</li>
+                                    <li>Какие решения могут быть приняты по результатам проверки сообщения?</li>
+                                    <li>Какие действия обязан выполнить следователь после принятия заявления?</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- УПЗ: Траффик-стоп -->
+                <div class="bg-white/95 backdrop-blur rounded-xl shadow-sm border border-slate-200 overflow-hidden transition-shadow hover:shadow-md mt-6">
+                    <button onclick="toggleAccordion('upz-traffic', 'chevron-traffic')" class="w-full px-6 py-5 flex items-center justify-between hover:bg-slate-50 transition-colors focus:outline-none group">
+                        <div class="flex items-center gap-4">
+                            <div class="bg-police-light p-3 rounded-full group-hover:bg-police-blue group-hover:text-white transition-colors text-police-accent shadow-sm">
+                                <i class="fa-solid fa-car-side text-xl"></i>
+                            </div>
+                            <h4 class="text-lg md:text-xl font-bold text-police-dark text-left">УПЗ: Траффик-стоп (10-55)</h4>
+                        </div>
+                        <i id="chevron-traffic" class="fa-solid fa-chevron-down text-slate-400 chevron text-lg bg-slate-100 p-2 rounded-full"></i>
+                    </button>
+                    <div id="upz-traffic" class="accordion-wrapper bg-slate-50 border-t border-slate-200">
+                        <div class="accordion-inner">
+                            <div class="p-6 md:p-8 text-slate-800">
+                                <p class="font-bold text-lg mb-6 text-police-blue">Порядок проведения стандартной остановки транспортного средства (10-55):</p>
+                                <div class="space-y-4">
+                                    <div class="flex gap-4 bg-white p-4 rounded-lg shadow-sm border border-slate-100">
+                                        <div class="bg-police-accent text-white w-8 h-8 rounded-full flex items-center justify-center font-bold shrink-0">1</div>
+                                        <div>
+                                            <h6 class="font-bold text-police-dark">Уведомление в мегафон</h6>
+                                            <p class="text-sm text-slate-600 mt-1">"Водитель авто [Марка/Цвет/Номера], прижмитесь к обочине и заглушите двигатель!"</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex gap-4 bg-white p-4 rounded-lg shadow-sm border border-slate-100">
+                                        <div class="bg-police-accent text-white w-8 h-8 rounded-full flex items-center justify-center font-bold shrink-0">2</div>
+                                        <div><h6 class="font-bold text-police-dark">Остановка и позиционирование</h6></div>
+                                    </div>
+                                    <div class="flex gap-4 bg-white p-4 rounded-lg shadow-sm border border-slate-100">
+                                        <div class="bg-police-accent text-white w-8 h-8 rounded-full flex items-center justify-center font-bold shrink-0">3</div>
+                                        <div><h6 class="font-bold text-police-dark">Доклад в рацию и приближение</h6></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-police-dark text-slate-400 py-8 border-t-2 border-police-blue/30 mt-auto relative z-10">
+        <div class="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-4">
+                <img src="https://i.postimg.cc/YCRwXznw/Emblem-of-the-Ministry-of-Internal-Affairs-1.png" class="h-12 w-12 object-contain opacity-60 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300 drop-shadow-md">
+                <div>
+                    <p class="text-sm text-slate-300 font-medium">© 2026 ОРЛС МВД.</p>
+                    <p class="text-xs mt-1 opacity-50">Методический портал отдела по работе с личным составом.</p>
+                </div>
+            </div>
+            <div class="flex flex-col items-center md:items-end text-sm text-slate-400 text-center md:text-right">
+                <p class="mb-1">
+                    By <span class="text-white font-semibold tracking-wide">Dionis_Gruntov</span> 
+                    <i class="fa-solid fa-heart text-red-500 mx-1.5 animate-pulse drop-shadow-md"></i> 
+                    by <span class="text-white font-semibold tracking-wide">Anastasiya_Gradowa</span>
+                </p>
+                <p class="opacity-70 hover:opacity-100 transition-opacity">by <span class="text-white font-bold tracking-widest uppercase">"ГАИ"</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleAccordion(contentId, chevronId) {
+            const content = document.getElementById(contentId);
+            const chevron = document.getElementById(chevronId);
+            if (content && chevron) {
+                content.classList.toggle('open');
+                chevron.classList.toggle('rotated');
+            }
+        }
+    </script>
+</body>
+</html>
