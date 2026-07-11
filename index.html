@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Методичка ОРЛС | Главная</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://i.postimg.cc/YCRwXznw/Emblem-of-the-Ministry-of-Internal-Affairs-1.png">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        police: {
+                            blue: '#1e3a8a',
+                            dark: '#0f172a',
+                            light: '#f1f5f9',
+                            accent: '#3b82f6',
+                            red: '#ef4444'
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.4s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(10px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .bg-pattern {
+            background-color: #f1f5f9;
+            background-image: url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M60 0L120 60L60 120L0 60Z' fill='none' stroke='%23cbd5e1' stroke-width='1' stroke-opacity='0.35'/%3E%3Cpath d='M0 0L120 120M120 0L0 120' stroke='%23cbd5e1' stroke-width='1' stroke-opacity='0.35'/%3E%3Cpath d='M60 0L120 120H0Z' fill='none' stroke='%2394a3b8' stroke-width='1' stroke-opacity='0.15'/%3E%3C/svg%3E");
+            background-size: 200px 200px;
+        }
+
+        #intro-screen {
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
+            background-color: #050505;
+            display: none;
+            justify-content: space-between;
+            align-items: center;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .strobe-red {
+            width: 40vw;
+            height: 150vh;
+            background: #ef4444;
+            filter: blur(100px);
+            opacity: 0;
+            animation: strobeRed 0.6s infinite;
+        }
+
+        .strobe-blue {
+            width: 40vw;
+            height: 150vh;
+            background: #3b82f6;
+            filter: blur(100px);
+            opacity: 0;
+            animation: strobeBlue 0.6s infinite;
+        }
+
+        @keyframes strobeRed {
+            0%, 20%, 100% { opacity: 0; }
+            5%, 15% { opacity: 0.9; }
+        }
+
+        @keyframes strobeBlue {
+            0%, 50%, 70%, 100% { opacity: 0; }
+            55%, 65% { opacity: 0.9; }
+        }
+        
+        .intro-hide { animation: fadeOutIntro 0.8s ease forwards; }
+        @keyframes fadeOutIntro { to { opacity: 0; visibility: hidden; } }
+
+        .accordion-wrapper {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.4s ease-in-out, opacity 0.4s ease-in-out;
+            opacity: 0;
+        }
+        
+        .accordion-wrapper.open {
+            grid-template-rows: 1fr;
+            opacity: 1;
+        }
+        
+        .accordion-inner { overflow: hidden; }
+        .chevron { transition: transform 0.3s ease; }
+        .chevron.rotated { transform: rotate(180deg); }
+
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="bg-pattern text-slate-800 antialiased min-h-screen flex flex-col relative">
+
+    <!-- Анимация мигалок при первом входе -->
+    <div id="intro-screen">
+        <div class="strobe-red"></div>
+        <div class="flex flex-col items-center z-10 opacity-90 relative">
+            <img src="https://i.postimg.cc/YCRwXznw/Emblem-of-the-Ministry-of-Internal-Affairs-1.png" alt="МВД" class="w-32 h-32 object-contain mb-4 drop-shadow-2xl">
+            <h1 class="text-white text-3xl font-bold tracking-widest uppercase">УМВД</h1>
+        </div>
+        <div class="strobe-blue"></div>
+    </div>
+
+    <!-- Шапка -->
+    <header class="bg-police-dark text-white shadow-xl sticky top-0 z-40 border-b-2 border-police-blue/30">
+        <div class="max-w-[95rem] mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col xl:flex-row items-center justify-between h-auto xl:h-[72px] py-4 xl:py-0 gap-4">
+                
+                <a href="index.html" class="flex items-center gap-4 cursor-pointer hover:opacity-80 transition-opacity shrink-0">
+                    <img src="https://i.postimg.cc/NjS8Pk0R/Patch-of-the-Police-of-Russia.png" alt="Герб ППС" class="h-11 w-11 object-contain drop-shadow-md">
+                    <div>
+                        <h1 class="text-xl md:text-2xl font-bold uppercase tracking-wider flex items-center gap-2">
+                            ОРЛС МВД <span class="hidden md:inline text-police-accent text-sm">|</span>
+                        </h1>
+                        <p class="text-xs text-slate-300 font-medium tracking-wide">Методический портал</p>
+                    </div>
+                </a>
+
+                <!-- Навигация (Ссылки на другие HTML-страницы) -->
+                <nav class="w-full xl:w-auto overflow-x-auto scrollbar-hide pb-1 xl:pb-0">
+                    <div class="flex items-center justify-start xl:justify-end space-x-1 min-w-max px-1">
+                        <a href="index.html" class="bg-police-blue text-white px-3.5 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2 shadow-inner">
+                            <i class="fa-solid fa-house"></i> Главная
+                        </a>
+                        <a href="baza.html" class="text-slate-300 hover:text-white hover:bg-slate-800 px-3.5 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2">
+                            <i class="fa-solid fa-users-viewfinder"></i> База сотрудников
+                        </a>
+                        <a href="ryadovie.html" class="text-slate-300 hover:text-white hover:bg-slate-800 px-3.5 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2">
+                            <i class="fa-solid fa-user-graduate"></i> Рядовые
+                        </a>
+                        <a href="obppsp.html" class="text-slate-300 hover:text-white hover:bg-slate-800 px-3.5 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2">
+                            <i class="fa-solid fa-shield-halved"></i> ОБ ППСП
+                        </a>
+                        <a href="upz.html" class="text-slate-300 hover:text-white hover:bg-slate-800 px-3.5 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2">
+                            <i class="fa-solid fa-truck-fast"></i> УПЗ
+                        </a>
+                        <a href="zakon.html" class="text-slate-300 hover:text-white hover:bg-slate-800 px-3.5 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2">
+                            <i class="fa-solid fa-scale-balanced"></i> Законодательство
+                        </a>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full relative z-10">
+        
+        <!-- Контент Главной -->
+        <div class="animate-fade-in">
+            
+            <!-- Банер -->
+            <div class="relative rounded-2xl shadow-lg overflow-hidden mb-8 h-[340px] flex items-center group bg-police-dark">
+                <div class="absolute inset-0 bg-[url('https://i.postimg.cc/9FjQ1RVZ/Kriminalnaya-Rossiya-gt.jpg')] bg-cover bg-center transition-transform duration-700 group-hover:scale-105 opacity-80"></div>
+                <div class="absolute inset-0 bg-gradient-to-r from-police-dark/95 via-police-dark/70 to-transparent"></div>
+                
+                <div class="relative z-10 px-8 w-full md:w-3/5">
+                    <div class="inline-block bg-white/10 backdrop-blur-md border border-white/20 text-white px-5 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-4 shadow-lg flex items-center gap-2 w-max">
+                        <i class="fa-solid fa-handshake"></i> Совместно с ГАИ и ППС
+                    </div>
+                    <h2 class="text-3xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight uppercase drop-shadow-2xl leading-tight">
+                        Отдел по работе с личным составом
+                    </h2>
+                </div>
+
+                <div class="absolute bottom-0 right-4 lg:right-20 h-[105%] z-10 hidden md:block pointer-events-none">
+                    <img src="https://i.postimg.cc/HnnHcJhB/Generated-Image-July-10-2026-11-00PM-Photoroom.png" alt="Сотрудник отдает честь" class="h-full object-contain drop-shadow-[0_15px_25px_rgba(0,0,0,0.8)]">
+                </div>
+            </div>
+
+            <!-- Аккордеон подробнее -->
+            <div class="mb-10">
+                <div class="bg-white/95 backdrop-blur rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                    <button onclick="toggleAccordion('details-content', 'details-chevron')" class="w-full px-6 py-4 flex items-center justify-between hover:bg-slate-50 transition-colors focus:outline-none group">
+                        <div class="flex items-center gap-3">
+                            <div class="bg-police-light text-police-blue p-2.5 rounded-lg group-hover:bg-police-blue group-hover:text-white transition-colors duration-300 shadow-sm">
+                                <i class="fa-solid fa-circle-info text-lg"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-slate-800 uppercase tracking-wide">Подробнее об отделе</h3>
+                        </div>
+                        <i id="details-chevron" class="fa-solid fa-chevron-down text-slate-400 chevron text-lg bg-slate-100 p-2 rounded-full"></i>
+                    </button>
+                    
+                    <div id="details-content" class="accordion-wrapper bg-slate-50 border-t border-slate-200">
+                        <div class="accordion-inner">
+                            <div class="p-6 md:p-8 text-slate-800">
+                                <div class="bg-police-blue text-white px-4 py-2 rounded-lg inline-block font-semibold shadow-md mb-6">
+                                    ОРЛС — отдел по работе с личным составом
+                                </div>
+                                
+                                <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                                    <h4 class="font-bold text-police-blue text-lg mb-4 flex items-center gap-2">
+                                        <i class="fa-solid fa-list-check"></i> Основные задачи отдела:
+                                    </h4>
+                                    <ul class="space-y-4 text-slate-700">
+                                        <li class="flex items-start gap-3 bg-slate-50 p-3 rounded-lg border border-slate-100">
+                                            <i class="fa-solid fa-minus text-police-accent mt-1 text-sm"></i> 
+                                            <span>контролирование работы сотрудников УМВД;</span>
+                                        </li>
+                                        <li class="flex items-start gap-3 bg-slate-50 p-3 rounded-lg border border-slate-100">
+                                            <i class="fa-solid fa-minus text-police-accent mt-1 text-sm"></i> 
+                                            <span>повышение эффективности работы и компетентности личного состава;</span>
+                                        </li>
+                                        <li class="flex items-start gap-3 bg-slate-50 p-3 rounded-lg border border-slate-100">
+                                            <i class="fa-solid fa-minus text-police-accent mt-1 text-sm"></i> 
+                                            <span>проведение лекций и тренировок направленных на повышение квалификации, для личного состава;</span>
+                                        </li>
+                                        <li class="flex items-start gap-3 bg-slate-50 p-3 rounded-lg border border-slate-100">
+                                            <i class="fa-solid fa-minus text-police-accent mt-1 text-sm"></i> 
+                                            <span>обучение курсантов полиции всем основным навыкам работы в полиции;</span>
+                                        </li>
+                                        <li class="flex items-start gap-3 bg-slate-50 p-3 rounded-lg border border-slate-100">
+                                            <i class="fa-solid fa-minus text-police-accent mt-1 text-sm"></i> 
+                                            <span>оценка результатов индивидуального обучения курсантов на знание законодательных и иных нормативных правовых актов в сфере внутренних дел и общей физической подготовки;</span>
+                                        </li>
+                                        <li class="flex items-start gap-3 bg-slate-50 p-3 rounded-lg border border-slate-100">
+                                            <i class="fa-solid fa-minus text-police-accent mt-1 text-sm"></i> 
+                                            <span>обучение по краткому курсу офицерского состава УМВД.</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Инфо-карточки -->
+            <div class="flex items-center gap-3 mb-6">
+                <i class="fa-solid fa-layer-group text-2xl text-police-accent"></i>
+                <h3 class="text-2xl font-bold text-police-dark">Справочная информация</h3>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+                <div class="bg-white/95 backdrop-blur rounded-xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="bg-gradient-to-r from-police-dark to-slate-800 text-white px-5 py-4 flex items-center gap-3">
+                        <div class="bg-white/20 p-2 rounded-lg"><i class="fa-solid fa-clipboard-list text-xl"></i></div>
+                        <h4 class="font-semibold text-lg tracking-wide">Собеседования</h4>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-sm text-slate-500 mb-5 font-medium border-b border-slate-100 pb-3">Правила проведения призывов и проверка кандидатов на службу в УМВД.</p>
+                        <ul class="text-sm space-y-3 text-slate-700">
+                            <li class="flex items-start"><i class="fa-solid fa-notes-medical text-police-accent mt-1 mr-3 w-4 text-center"></i> <span>Проверка мед. карты и лицензий</span></li>
+                            <li class="flex items-start"><i class="fa-solid fa-brain text-police-accent mt-1 mr-3 w-4 text-center"></i> <span>Проверка на знание терминов</span></li>
+                            <li class="flex items-start"><i class="fa-solid fa-scale-unbalanced text-police-accent mt-1 mr-3 w-4 text-center"></i> <span>Оценка адекватности кандидата</span></li>
+                            <li class="flex items-start"><i class="fa-solid fa-shirt text-police-accent mt-1 mr-3 w-4 text-center"></i> <span>Проверка опрятности (внешний вид)</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-white/95 backdrop-blur rounded-xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="bg-gradient-to-r from-police-dark to-slate-800 text-white px-5 py-4 flex items-center gap-3">
+                        <div class="bg-white/20 p-2 rounded-lg"><i class="fa-solid fa-scale-balanced text-xl"></i></div>
+                        <h4 class="font-semibold text-lg tracking-wide">Юриспруденция</h4>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-sm text-slate-500 mb-5 font-medium border-b border-slate-100 pb-3">Основные законы и кодексы, которые обязан знать каждый сотрудник.</p>
+                        <ul class="text-sm space-y-3 text-slate-700">
+                            <li class="flex items-start"><i class="fa-solid fa-gavel text-police-blue mt-1 mr-3 w-4 text-center"></i> <span>Уголовный Кодекс (УК)</span></li>
+                            <li class="flex items-start"><i class="fa-solid fa-file-contract text-police-blue mt-1 mr-3 w-4 text-center"></i> <span>Кодекс об Адм. Правонарушениях</span></li>
+                            <li class="flex items-start"><i class="fa-solid fa-folder-open text-police-blue mt-1 mr-3 w-4 text-center"></i> <span>Процессуальный кодекс</span></li>
+                            <li class="flex items-start"><i class="fa-solid fa-landmark text-police-blue mt-1 mr-3 w-4 text-center"></i> <span>Федеральное Постановление</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-white/95 backdrop-blur rounded-xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="bg-gradient-to-r from-police-dark to-slate-800 text-white px-5 py-4 flex items-center gap-3">
+                        <div class="bg-red-500/80 p-2 rounded-lg"><i class="fa-solid fa-triangle-exclamation text-white text-xl"></i></div>
+                        <h4 class="font-semibold text-lg tracking-wide">Угрозы и ЧС</h4>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-sm text-slate-500 mb-5 font-medium border-b border-slate-100 pb-3">Регламент действий личного состава при возникновении чрезвычайных ситуаций.</p>
+                        <ul class="text-sm space-y-3 text-slate-700">
+                            <li class="flex items-start"><i class="fa-solid fa-bomb text-police-red mt-1 mr-3 w-4 text-center"></i> <span>Террористический акт / Захват</span></li>
+                            <li class="flex items-start"><i class="fa-solid fa-gun text-police-red mt-1 mr-3 w-4 text-center"></i> <span>Нападение на отдел полиции</span></li>
+                            <li class="flex items-start"><i class="fa-solid fa-user-ninja text-police-red mt-1 mr-3 w-4 text-center"></i> <span>Похищение гос. сотрудника</span></li>
+                            <li class="flex items-start"><i class="fa-solid fa-tower-broadcast text-police-red mt-1 mr-3 w-4 text-center"></i> <span>Сбор по коду 0 (Тревога)</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Рабочие материалы -->
+            <div class="flex items-center justify-between mb-2 mt-10">
+                <div class="flex items-center gap-3">
+                    <i class="fa-solid fa-folder-tree text-2xl text-police-accent"></i>
+                    <h3 class="text-2xl font-bold text-police-dark">Рабочие материалы</h3>
+                </div>
+            </div>
+            
+            <div class="space-y-4">
+                <!-- Доклады -->
+                <div class="bg-white/95 backdrop-blur rounded-xl shadow-sm border border-slate-200 overflow-hidden transition-shadow hover:shadow-md">
+                    <button onclick="toggleAccordion('reports-content', 'chevron-reports')" class="w-full px-6 py-5 flex items-center justify-between hover:bg-slate-50 transition-colors focus:outline-none group">
+                        <div class="flex items-center gap-4">
+                            <div class="bg-police-light p-3 rounded-full group-hover:bg-police-blue group-hover:text-white transition-colors text-police-accent shadow-sm">
+                                <i class="fa-solid fa-walkie-talkie text-xl"></i>
+                            </div>
+                            <h4 class="text-lg md:text-xl font-bold text-police-dark text-left">Доклады на все случаи жизни</h4>
+                        </div>
+                        <i id="chevron-reports" class="fa-solid fa-chevron-down text-slate-400 chevron text-lg bg-slate-100 p-2 rounded-full"></i>
+                    </button>
+                    <div id="reports-content" class="accordion-wrapper bg-slate-50 border-t border-slate-200">
+                        <div class="accordion-inner">
+                            <div class="p-6 md:p-8 text-slate-800 space-y-6">
+                                <div class="bg-white p-5 rounded-lg border border-slate-200 shadow-sm">
+                                    <h5 class="font-bold text-police-blue mb-3 border-b pb-2"><i class="fa-solid fa-building-shield mr-2"></i>Проверка стационарных постов</h5>
+                                    <ul class="space-y-2 text-sm font-mono bg-slate-100 p-4 rounded text-slate-700">
+                                        <li>/r Докладывает Ваша фамилия: Выехал на проверку стационарных постов. Состав-1 Код-1.</li>
+                                        <li>/r Докладывает Ваша фамилия: Прибыл на стационарный пост "Ю-1" Сотрудники присутствуют/отсутствуют.</li>
+                                        <li>/r Докладывает Ваша фамилия: Прибыл на стационарный пост "ЕСС" Сотрудники присутствуют/отсутствуют.</li>
+                                        <li>/r Докладывает Ваша фамилия: Прибыл на стационарный пост "Причал" Сотрудники присутствуют/отсутствуют.</li>
+                                        <li>/r Докладывает Ваша фамилия: Прибыл на стационарный пост "Б-2" Сотрудники присутствуют/отсутствуют.</li>
+                                        <li>/r Докладывает Ваша фамилия: Прибыл на стационарный пост "КПП-1" Сотрудники присутствуют/отсутствуют.</li>
+                                        <li>/r Докладывает Ваша фамилия: Прибыл на стационарный пост "Б-1" Сотрудники присутствуют/отсутствуют.</li>
+                                        <li>/r Докладывает Ваша фамилия: Закончил проверку стационарных постов. Состав-1 Код-1.</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-white p-5 rounded-lg border border-slate-200 shadow-sm">
+                                    <h5 class="font-bold text-police-blue mb-3 border-b pb-2"><i class="fa-solid fa-users mr-2"></i>Помощь на собеседовании</h5>
+                                    <ul class="space-y-2 text-sm font-mono bg-slate-100 p-4 rounded text-slate-700">
+                                        <li>/r Докладывает Ваша фамилия: Начал оказывать помощь в проведении собеседования. Состав-1 Код-1.</li>
+                                        <li>/r Докладывает Ваша фамилия: Закончил оказывать помощь в проведении собеседования. Состав-1 Код-1.</li>
+                                        <div class="h-px bg-slate-300 my-2"></div>
+                                        <li>/r Докладывает Ваша фамилия: Заступил на охрану собеседования. Состав-1 Код-1.</li>
+                                        <li>/r Докладывает Ваша фамилия: Продолжаю охрану собеседования. Состав-1 Код-1.</li>
+                                        <li>/r Докладывает Ваша фамилия: Закончил охрану собеседования. Состав-1 Код-1.</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-white p-5 rounded-lg border border-slate-200 shadow-sm">
+                                    <h5 class="font-bold text-police-blue mb-3 border-b pb-2"><i class="fa-solid fa-car-on mr-2"></i>Дежурство и патрулирование</h5>
+                                    <ul class="space-y-2 text-sm font-mono bg-slate-100 p-4 rounded text-slate-700">
+                                        <li>/r Докладывает Ваша фамилия: Начал дежурство на посту "Ю-1" [или ЕСС/Причал/Б-1]. Состав-1 Код-1.</li>
+                                        <li>/r Докладывает Ваша фамилия: Продолжаю дежурство на посту "Ю-1" [или ЕСС/Причал/Б-1]. Состав-1 Код-1.</li>
+                                        <li>/r Докладывает Ваша фамилия: Закончил дежурство на посту "Ю-1" [или ЕСС/Причал/Б-1]. Состав-1 Код-1.</li>
+                                        <div class="h-px bg-slate-300 my-2"></div>
+                                        <li>/r Докладывает Ваша фамилия: Начал патрулирование на машине по Нижегородской области. Состав-1 Код-1.</li>
+                                        <li>/r Докладывает Ваша фамилия: Продолжаю патрулирование на машине по Нижегородской области. Состав-1 Код-1.</li>
+                                        <li>/r Докладывает Ваша фамилия: Закончил патрулирование на машине по Нижегородской области. Состав-1 Код-1.</li>
+                                        <div class="h-px bg-slate-300 my-2"></div>
+                                        <li>/r Докладывает Ваша фамилия: Начал пеший патруль. Состав-1 Код-1.</li>
+                                        <li>/r Докладывает Ваша фамилия: Продолжил пеший патруль. Состав-1 Код-1.</li>
+                                        <li>/r Докладывает Ваша фамилия: Закончил пеший патруль. Состав-1 Код-1.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Собеседование -->
+                <div class="bg-white/95 backdrop-blur rounded-xl shadow-sm border border-slate-200 overflow-hidden transition-shadow hover:shadow-md">
+                    <button onclick="toggleAccordion('interview-content', 'chevron-interview')" class="w-full px-6 py-5 flex items-center justify-between hover:bg-slate-50 transition-colors focus:outline-none group">
+                        <div class="flex items-center gap-4">
+                            <div class="bg-police-light p-3 rounded-full group-hover:bg-police-blue group-hover:text-white transition-colors text-police-accent shadow-sm">
+                                <i class="fa-solid fa-clipboard-user text-xl"></i>
+                            </div>
+                            <h4 class="text-lg md:text-xl font-bold text-police-dark text-left">Справочник: Проведение собеседования</h4>
+                        </div>
+                        <i id="chevron-interview" class="fa-solid fa-chevron-down text-slate-400 chevron text-lg bg-slate-100 p-2 rounded-full"></i>
+                    </button>
+                    <div id="interview-content" class="accordion-wrapper bg-slate-50 border-t border-slate-200">
+                        <div class="accordion-inner">
+                            <div class="p-6 md:p-8 text-slate-800 space-y-6">
+                                <div class="mb-6">
+                                    <h5 class="font-bold text-police-dark text-lg mb-3 border-l-4 border-police-accent pl-3">КРИТЕРИИ ДЛЯ ВСТУПЛЕНИЯ</h5>
+                                    <ul class="list-disc pl-8 space-y-1 text-sm text-slate-700">
+                                        <li>Проживание в области не менее семи лет (7+ уровень);</li>
+                                        <li>Не более одной судимости;</li>
+                                        <li>Хорошая законопослушность (не менее 75);</li>
+                                        <li>Отсутствие штрафов;</li>
+                                        <li>Диплом о образовании в сфере права, криминологии и других смежных специальностей;</li>
+                                        <li>Знание основной терминологии;</li>
+                                        <li>Адекватность, соблюдение законов и моральных норм;</li>
+                                        <li>Наличие военного билета.</li>
+                                    </ul>
+                                </div>
+                                <div class="mb-6">
+                                    <h5 class="font-bold text-police-dark text-lg mb-3 border-l-4 border-police-accent pl-3">ПОРЯДОК ДОПУСКА К СОБЕСЕДОВАНИЮ</h5>
+                                    <ol class="list-decimal pl-8 space-y-2 text-sm text-slate-700">
+                                        <li>Перед началом собеседования игрок должен оплатить все штрафы в ближайшем банкомате;</li>
+                                        <li>Игрок, пришедший на собеседование, должен пройти личный досмотр у сотрудников полиции;</li>
+                                        <li>После прохождения личного досмотра игрок проходит в зону ожидания, садится на лавку и ждет, пока его вызовут в кабинет на собеседования.</li>
+                                    </ol>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold text-police-dark text-lg mb-3 border-l-4 border-police-accent pl-3">ПОРЯДОК ПРОВЕДЕНИЯ СОБЕСЕДОВАНИЯ</h5>
+                                    <div class="space-y-4 text-sm text-slate-700">
+                                        <div class="bg-white p-4 rounded border border-slate-200">
+                                            <p class="font-bold text-police-blue mb-2">1. Знакомство</p>
+                                            <p>Руководитель организации или другое уполномоченное лицо представляется и просит собеседника представиться, рассказать о себе и своем образовании:</p>
+                                            <div class="mt-2 pl-4 border-l-2 border-slate-300 italic text-slate-600">
+                                                - Здравствуйте. Вы готовы к собеседованию?<br>
+                                                - Да, готов.<br>
+                                                - Пожалуйста, представьтесь, расскажите о себе: как Вас зовут, сколько Вам лет, чем занимаетесь? Какое имеете образование и по какой специальности обучались?
+                                            </div>
+                                        </div>
+                                        <div class="bg-white p-4 rounded border border-slate-200">
+                                            <p class="font-bold text-police-blue mb-2">3. Проверка документов</p>
+                                            <p>Просьба предоставить пакет документов (/pass, /mytk, /lic). При проверке трудовой книжки (/mytk), смотрится история работы в других организациях:</p>
+                                            <div class="mt-2 pl-4 border-l-2 border-slate-300 italic text-slate-600">
+                                                - Для заполнения некоторых документов мне нужна кое-какая информация. Будьте добры, передайте мне свой паспорт, трудовую книжку и лицензии
+                                            </div>
+                                        </div>
+                                        <div class="bg-white p-4 rounded border border-slate-200">
+                                            <p class="font-bold text-police-blue mb-2">4. Проверка терминов</p>
+                                            <p>Задается несколько терминов (тематических). Термины не должны быть слишком сложными для новичка.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Подвал -->
+    <footer class="bg-police-dark text-slate-400 py-8 border-t-2 border-police-blue/30 mt-auto relative z-10">
+        <div class="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-4">
+                <img src="https://i.postimg.cc/YCRwXznw/Emblem-of-the-Ministry-of-Internal-Affairs-1.png" class="h-12 w-12 object-contain opacity-60 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300 drop-shadow-md">
+                <div>
+                    <p class="text-sm text-slate-300 font-medium">© 2026 ОРЛС МВД.</p>
+                    <p class="text-xs mt-1 opacity-50">Методический портал отдела по работе с личным составом.</p>
+                </div>
+            </div>
+            
+            <div class="flex flex-col items-center md:items-end text-sm text-slate-400 text-center md:text-right">
+                <p class="mb-1">
+                    By <span class="text-white font-semibold tracking-wide">Dionis_Gruntov</span> 
+                    <i class="fa-solid fa-heart text-red-500 mx-1.5 animate-pulse drop-shadow-md"></i> 
+                    by <span class="text-white font-semibold tracking-wide">Anastasiya_Gradowa</span>
+                </p>
+                <p class="opacity-70 hover:opacity-100 transition-opacity">by <span class="text-white font-bold tracking-widest uppercase">"ГАИ"</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleAccordion(contentId, chevronId) {
+            const content = document.getElementById(contentId);
+            const chevron = document.getElementById(chevronId);
+            if (content && chevron) {
+                content.classList.toggle('open');
+                chevron.classList.toggle('rotated');
+            }
+        }
+        
+        window.addEventListener('DOMContentLoaded', () => {
+            const intro = document.getElementById('intro-screen');
+            if (intro) {
+                if (!sessionStorage.getItem('policeIntroPlayed')) {
+                    intro.style.display = 'flex'; 
+                    setTimeout(() => {
+                        intro.classList.add('intro-hide');
+                        setTimeout(() => intro.remove(), 800);
+                    }, 2500); 
+                    sessionStorage.setItem('policeIntroPlayed', 'true');
+                } else {
+                    intro.remove();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
